@@ -1,0 +1,61 @@
+# https://github.com/WeblateOrg/docker-compose
+# https://docs.weblate.org/en/latest/admin/install/docker.html
+# https://docs.weblate.org/en/latest/admin/install/docker.html#generic-settings
+
+version: '3'
+
+services:
+  weblate:
+    container_name: weblate
+#    image: weblate/weblate:edge
+    ports:
+      - 3005:8080
+      - 3006:4443
+
+    environment:
+#      WEBLATE_DEBUG: 1
+
+      # E-Mail server settings
+      WEBLATE_EMAIL_HOST:
+      WEBLATE_EMAIL_USE_TLS: 1
+      WEBLATE_EMAIL_PORT: 587
+      WEBLATE_EMAIL_HOST_USER:
+      WEBLATE_EMAIL_HOST_PASSWORD:
+
+      # E-Mail settings
+      WEBLATE_SERVER_EMAIL: weblate@domain.net
+      WEBLATE_DEFAULT_FROM_EMAIL: weblate@domain.net
+
+      # Weblate settings
+      WEBLATE_SITE_DOMAIN: weblate.domain.net
+      WEBLATE_SITE_TITLE: Weblate
+
+      # Weblate admin
+      WEBLATE_ADMIN_NAME: Your Name
+      WEBLATE_ADMIN_PASSWORD: Your Password (Comment this line again after the initial setup)
+      WEBLATE_ADMIN_EMAIL: weblate@domain.net
+
+      # Webserver settings
+      WEBLATE_ENABLE_HTTPS: 1
+      WEBLATE_IP_PROXY_HEADER: HTTP_X_FORWARDED_FOR
+      WEBLATE_SECURE_PROXY_SSL_HEADER: HTTP_X_FORWARDED_PROTO,https
+
+      # Git configuration
+      WEBLATE_DEFAULT_COMMITER_EMAIL: weblate@domain.net
+      WEBLATE_DEFAULT_COMMITER_NAME: Weblate
+
+      # GitHub pull-requests integration
+      WEBLATE_GITHUB_USERNAME:
+      WEBLATE_GITHUB_TOKEN:
+      WEBLATE_GITHUB_HOST: api.github.com
+
+      # GitLab merge-requests integration
+      WEBLATE_GITLAB_USERNAME:
+      WEBLATE_GITLAB_TOKEN:
+      WEBLATE_GITLAB_HOST: gitlab.com
+
+  database:
+    container_name: weblate_database
+
+  cache:
+    container_name: weblate_cache

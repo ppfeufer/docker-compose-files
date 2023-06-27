@@ -1,0 +1,12 @@
+phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=0
+    restart: always
+    ports:
+     - 3008:80
+    volumes:
+      - /sessions
+      - ./config/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+      - ./theme/:/www/themes/theme/

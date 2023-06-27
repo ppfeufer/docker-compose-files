@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine:latest
+    container_name: privatebin
+    read_only: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - './privatebin-data:/srv/data:' # data volume for pastes allows pastes
+      - './privatebin-config/conf.php:/srv/cfg/conf.php:ro' # second volume for custom configuration file
+    ports:
+      - 3007:8080
+    restart: always
